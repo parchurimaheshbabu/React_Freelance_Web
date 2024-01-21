@@ -1,0 +1,95 @@
+ .content {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: white
+    }
+.header{
+    color: white;
+}
+    nav {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+      position: sticky;
+      top:0;
+      border-radius: 10px;
+    }
+    .card ul{
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+
+      text-align: center;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .myprofile {
+      background-color: rgb(17, 171, 166);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin: 20px;
+      width: 500px;
+
+    }
+    .myprofile p{
+        margin: 6px;
+    }
+
+    .profile-img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+
+    .view-profile-btn {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .rating{
+        width: 100%;
+        color: aqua;
+        border: 2px solid grey;
+    }
+    .rating p{
+        color: rgb(18, 141, 141);
+        font-weight: 600;
+        margin: 0;
+        text-align: left;
+        padding: 8px  20px;
+    }
+    .ratingheader{
+    float: left;
+    color: rgba(9, 161, 161, 0.9);
+    font-size: large;
+    }
+    

@@ -1,0 +1,9 @@
+nav{
+    display: flex;
+}
+#radd{
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
