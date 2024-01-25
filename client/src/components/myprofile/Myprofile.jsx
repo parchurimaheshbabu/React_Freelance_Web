@@ -29,9 +29,13 @@ const Myprofile = () => {
         
   <nav>
     <h1 className='header'>Developers Hub</h1>
-        <Link to='/dashboard'>Profiles</Link>
+        <div className="uls">
+          <Link to='/dashboard'>Profiles</Link>
+        <Link to='/updateprofile'>Update Profile</Link>
+        <Link to='/deleteaccount'>Delete Profile</Link>
         <Link to='/login' onClick={()=>localStorage.removeItem('token')}>Logout</Link>
     
+        </div>
   </nav>
 
   <div className="container">
@@ -40,17 +44,17 @@ const Myprofile = () => {
      <div className="myprofile">
       <img className="profile-img" src="https://via.placeholder.com/100" alt="Profile" />
       <h2>{data.fullname}</h2>
-            <p>India</p>
+            <p>Location:India</p>
 
-      <p>{data.email}</p>
-      <p>{data.mobile}</p>
-      
-      { /* <p>{profile.skills}</p> */ }
-      {/* /* <ul>
-        {profile.skills.split(',').map(skills=>
-            <li>{profile.skills}</li>
+      <p>Email:{data.email}</p>
+      <p>Phone:{data.mobile}</p>
+              <p>Proficient In</p>
+
+      <ul className='myskills'>
+        {data.skills.split(',').map(skills=>
+            <li>*{skills}</li>
             )}
-      </ul> */ }
+      </ul> 
       {/* <button class="view-profile-btn">View Profile</button> */}
     </div>  }
     <h4 className='ratingheader'>Rating & Reviews</h4>

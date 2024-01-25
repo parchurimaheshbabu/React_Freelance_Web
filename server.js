@@ -2,7 +2,7 @@ const express = require("express");
 const middleware = require("./middleware");
 const reviewmodel = require("./reviewmodel");
 const app = express();
-const cors=require('cors');
+const cors = require("cors");
 const mongse = require("mongoose");
 const devuser = require("./devusermodel");
 const jwt = require("jsonwebtoken");
@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 app.use(express.json());
 //origin * for to use any router without any restriction
 // Cross-Origin Resource Sharing
-app.use(cors({origin:'*'}));
+app.use(cors({ origin: "*" }));
 mongse
   .connect(
     "mongodb+srv://parchurimaheshbabu:vcGzGiz0SFZjduxD@cluster0.o2dstmi.mongodb.net/?retryWrites=true&w=majority"
@@ -52,6 +52,27 @@ app.post("/register", async (req, res) => {
   }
 });
 
+//update
+app.put("/update/:id", async (req, res) => {
+  try {
+    const { fullname, email, mobile, skills, password, confirmpassword } =
+      req.body;
+    const myEmployee = await devuser.findByIdAndUpdate(
+      req.params.id,
+      { fullname, email, mobile, skills, password, confirmpassword },
+      { new: true }
+    );
+    if (!myEmployee) {
+      return res.status(404).json({ message: "profile not found" });
+    }
+    res.status(200).json(myEmployee);
+  } catch (error) {
+    console.error("There Is An Error", error);
+
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 // LOGIN
 
 app.post("/login", async (req, res) => {
@@ -72,7 +93,7 @@ app.post("/login", async (req, res) => {
 
     let payload = {
       user: {
-        id: exist.id,
+        id: exist._id,
       },
     };
     jwt.sign(
@@ -82,7 +103,8 @@ app.post("/login", async (req, res) => {
       // set expiry time 1 hour for token
       (err, token) => {
         if (err) throw err;
-        return res.json({ token });
+        // localStorage.setItem("userId", exist._id);
+        return res.json({ token, id: exist._id });
       }
     );
   } catch (err) {
@@ -128,7 +150,7 @@ app.post("/addreview", middleware, async (req, res) => {
       taskworker,
       rating,
     });
-    newReview.save();
+    await newReview.save();
     return res.status(200).send("Review Updated Successfully");
   } catch (err) {
     console.log(err);
@@ -142,10 +164,28 @@ app.get("/myreview", middleware, async (req, res) => {
     let myreviews = allreviews.filter(
       (review) => review.taskworker.toString() === req.user.id.toString()
     );
+
     return res.status(200).json(myreviews);
   } catch {
     console.log(err);
-    return res.status(500).send("Server Error"); 
+    return res.status(500).send("Server Error");
+  }
+});
+
+// Delete
+
+app.delete("/delete/:id", middleware, async (req, res) => {
+  try {
+    const deleteemployee = await devuser.findByIdAndDelete(req.user.id);
+    if (!deleteemployee) {
+      return res.status(404).json({ message: "user not found" });
+    } else {
+      res.status(204).json({ message: "Deleted Success fully" });
+    }
+  } catch (error) {
+    console.error("There Is An Error", error);
+
+    res.status(500).json({ message: "Server Error" });
   }
 });
 

@@ -19,6 +19,7 @@ const Loginpage = () => {
     axios.post('http://localhost:4000/login',data).then(
       res => {
         localStorage.setItem('token',res.data.token);
+        localStorage.setItem('userid',res.data.id);
         setAuth(true);
       }
       // console.log(res.data)
@@ -40,6 +41,8 @@ const Loginpage = () => {
 //   return <redirect to= '/dashboard'/>
 // }
   if (auth) {
+  let  k=localStorage.getItem('userId');
+    console.log({k})
 return <Navigate to='/dashboard' />
   }
  
@@ -55,9 +58,10 @@ return <Navigate to='/dashboard' />
 
         {/* Password input */}
         <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" onChange={changeHandler} />
+<div className='toggle'>
+          <input type="password" id="password" name="password" placeholder="Enter your password" onChange={changeHandler} />
 
-        {/* Login button */}
+  </div>        {/* Login button */}
         <button type="submit" className="login">
           Login
         </button>

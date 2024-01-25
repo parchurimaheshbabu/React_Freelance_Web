@@ -11,7 +11,7 @@
       background-color: #333;
       color: white;
       text-align: center;
-      padding: 10px 0;
+      padding: 10px 7px;
       width: 100%;
       position: sticky;
       top:0;
@@ -93,3 +93,15 @@
     font-size: large;
     }
     
+    .myskills{
+      display: flex;
+      list-style: none;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .rating{
+      border: 1px solid rgb(134, 126, 126);
+      margin: 1px;
+width: 100%;    
+padding: 10px;}

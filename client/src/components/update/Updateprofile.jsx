@@ -1,8 +1,12 @@
-import React ,{useState}from 'react'
-import './Registerpage.css'
+import React from 'react'
 import axios from 'axios';
-const Registerpage = () => {
-  
+import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
+
+const Updateprofile = () => {
+
+    const id=localStorage.getItem('userid')
+
 const [reg, setReg] = useState({
   fullname:'',  
   email: '',
@@ -19,33 +23,26 @@ const [reg, setReg] = useState({
   const submitHandler = e => {
     e.preventDefault();
      console.log('Original State:', reg);
-    axios.post('http://localhost:4000/register',reg).then(
+    axios.put(`http://localhost:4000/update/${id}`,reg).then(
       res =>{
-        console.log(reg._id)
-        alert('Registerd Successfully');
+        alert('updated Successfully');
       }
     )
-   
+    }
 
-    // // Logging the updated state using a callback
-    // setData(prevData => {
-    //   console.log('Updated State:', prevData);
-    //   return prevData;
-    // });
-    //  // Your original console.log statement
-  }
-
-
+     if (!localStorage.getItem('token')){
+        return <Navigate to='/login'/>
+    }
   return (
 <form className='regi' onSubmit={submitHandler}>
      <div className="register-container">
-      <h2 className="register-heading">Register</h2>
+      <h2 className="register-heading">Edit Profile</h2>
 
       {/* Full Name input */}
       <label htmlFor="fullname" className="register-label" >
         Full Name:
       </label>
-      <input type="text" id="fullname" name='fullname' className="register-input" placeholder="Enter your full name" onChange={changeHandler} required/>
+      <input type="text" id="fullname" name='fullname' className="register-input" placeholder="Enter your full name"  onChange={changeHandler} required/>
 
       {/* Email input */}
       <label htmlFor="email" className="register-label">
@@ -86,15 +83,12 @@ const [reg, setReg] = useState({
 
       {/* Register button */}
       <button className="register-button"  type='submit'>
-        Register
+        Edit
       </button>
-      <p>Already Have An Account <a href='login'>Sign in</a></p>
+      <p>To View Updation Go To <a href='/myprofile'>Profile</a></p>
     </div>
     </form>
-  );
-    
-
-    
+    )
 }
 
-export default Registerpage
+export default Updateprofile;

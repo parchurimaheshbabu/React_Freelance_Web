@@ -40,7 +40,6 @@ const Dashboard = () => {
      <div className="info">
          <h2>{profile.fullname}</h2>
       <p>{profile.email}</p>
-      {/* <p>{profile.skills}</p> */}
       <p>India</p>
 <Link to={`/individualprofile/${profile.fullname}/${profile.email}/${profile.skills}/${profile.mobile}/${profile._id}`}>    <button class="view-profile-btn">View Profile</button></Link>
      </div>

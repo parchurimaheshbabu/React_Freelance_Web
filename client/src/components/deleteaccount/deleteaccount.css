@@ -1,0 +1,12 @@
+.read{
+
+    margin: 20px;
+    background-color: rgb(225, 225, 198);
+    padding: 20px;
+    border-radius: 10px;
+}
+.del{
+    width: 100%;
+    background-color: red;
+    color: white;
+}
